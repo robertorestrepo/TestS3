@@ -1,0 +1,62 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle.es.yml' %}
+
+{% block fos_user_content %}
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+    
+    <div class="container">
+            <div class="logo" style="margin-bottom:20px;">
+                
+            </div>
+                <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
+
+                     {% block sonata_user_login_error %}
+                        {% if error %}
+                            <div class="alert alert-danger alert-error">{{ error|trans([], 'FOSUserBundle') }}</div>
+                        {% endif %}
+                    {% endblock %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="text" class="form-control" id="username"  name="_username" value="{{ last_username }}" required="required">
+                        <label>{{ 'security.login.username'|trans([], 'FOSUserBundle') }}</label>
+                        <span class="help-block">{{ 'security.login.userError'|trans([], 'FOSUserBundle') }}</span>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="password" class="form-control" id="password" name="_password" required="required">
+                        <label>{{ 'security.login.password'|trans([], 'FOSUserBundle') }}</label>
+                        <span class="help-block">{{ 'security.login.passError'|trans([], 'FOSUserBundle') }}</span>
+                    </div>
+                    <div class="form-group form-md-line-input">
+                        <div class="md-checkbox-list">
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="remember_me" name="_remember_me" class="md-check" value="on">
+                                <label for="remember_me">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                   {{ 'security.login.remember_me'|trans([], 'FOSUserBundle') }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8">
+                            <button type="submit" id="_submit" name="_submit" class="btn blue form-control">{{ 'security.login.submit'|trans([], 'FOSUserBundle') }}</button>
+                        </div>
+                    </div>
+                </form>
+            <div class="clearfix"></div>
+            <div class="logo" style="margin-top:20px;">
+                <h6>Powered by: ImExHS - Developed by: Hiruko</h6>
+            </div>
+        </div> {# Fin container #}
+
+    
+    
+    
+{% endblock fos_user_content %}
