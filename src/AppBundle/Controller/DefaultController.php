@@ -13,7 +13,8 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request){
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig');
+        $csrfToken = $this->get('security.csrf.token_manager')->isGranted('ROLE_ADMIN');
+        return $this->render('default/index.html.twig', array('ROLE' => $csrfToken ));
     }
 	
 	/**

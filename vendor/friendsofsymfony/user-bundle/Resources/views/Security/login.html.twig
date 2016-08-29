@@ -6,9 +6,8 @@
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
-
     
-    <div class="container">
+    <div class="container" style="max-width:500px; margin-top:100px;" >
             <div class="logo" style="margin-bottom:20px;">
                 
             </div>
@@ -24,12 +23,10 @@
                     <div class="form-group form-md-line-input form-md-floating-label">
                         <input type="text" class="form-control" id="username"  name="_username" value="{{ last_username }}" required="required">
                         <label>{{ 'security.login.username'|trans([], 'FOSUserBundle') }}</label>
-                        <span class="help-block">{{ 'security.login.userError'|trans([], 'FOSUserBundle') }}</span>
                     </div>
                     <div class="form-group form-md-line-input form-md-floating-label">
                         <input type="password" class="form-control" id="password" name="_password" required="required">
                         <label>{{ 'security.login.password'|trans([], 'FOSUserBundle') }}</label>
-                        <span class="help-block">{{ 'security.login.passError'|trans([], 'FOSUserBundle') }}</span>
                     </div>
                     <div class="form-group form-md-line-input">
                         <div class="md-checkbox-list">
@@ -46,14 +43,11 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-8">
-                            <button type="submit" id="_submit" name="_submit" class="btn blue form-control">{{ 'security.login.submit'|trans([], 'FOSUserBundle') }}</button>
+                            <button type="submit" id="_submit" name="_submit" class="btn btn-primary form-control">{{ 'security.login.submit'|trans([], 'FOSUserBundle') }}</button>
                         </div>
                     </div>
                 </form>
             <div class="clearfix"></div>
-            <div class="logo" style="margin-top:20px;">
-                <h6>Powered by: ImExHS - Developed by: Hiruko</h6>
-            </div>
         </div> {# Fin container #}
 
     
