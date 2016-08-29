@@ -1,0 +1,67 @@
+body {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+}
+label,h1,h2,h3,h4,h5,h6{
+    color:#333;
+}
+.form-group form-md-line-input form-md-floating-label{
+  color: #333;
+}
+.form-group.form-md-line-input .form-control {
+  border-bottom: 1px solid #e5e5e5;
+  color: #fff;
+}
+.form-group.form-md-line-input .form-control {
+    color:#333;
+}
+.form-group.form-md-line .form-control {
+    color:#333;
+}
+.form-group.form-md-line-input.form-md-floating-label .form-control ~ label{
+    color:#fff;
+}
+.md-checkbox label > .box{
+    border-color:#333;
+}
+.help-block {
+    color:#333;
+}
+.container{
+    max-width:500px;
+    margin-top:100px;
+}
+.logo{
+    margin:0 auto;
+    text-align:center;
+}
+video { 
+   position: fixed;
+   right: 0;
+   bottom: 0;
+   min-width: 100%;
+   min-height: 100%;
+   width: auto;
+   height: auto;
+   z-index: -100;
+   background: #111;
+   background-size: cover;
+   transition: 1s opacity;
+}
+.stopfade { 
+    opacity: .5;
+}
+@media screen and (max-width: 500px) { 
+div{width:100%;} 
+}
+@media screen and (max-device-width: 800px) {
+html { 
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed; }
+#bgvid { display: none; }
+}
+.form-group.form-md-line-input .form-control.edited:not([readonly]) ~ .help-block, .form-group.form-md-line-input .form-control:focus:not([readonly]) ~ .help-block, .form-group.form-md-line-input .form-control.focus:not([readonly]) ~ .help-block{
+    color:#89C4F4;
+}
