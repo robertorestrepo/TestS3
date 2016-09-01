@@ -8,10 +8,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * UserApp
  *
- * @ORM\Table(name="user_app")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserAppRepository")
  */
-class UserApp implements UserInterface, \Serializable
+class User implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -28,6 +27,13 @@ class UserApp implements UserInterface, \Serializable
      * @ORM\Column(name="empresa", type="string", length=255)
      */
     private $empresa;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", length=255)
+     */
+    private $direccion;
 
     /**
      * @var string
@@ -53,9 +59,9 @@ class UserApp implements UserInterface, \Serializable
     /**
      * @var bool
      *
-     * @ORM\Column(name="isActive", type="boolean")
+     * @ORM\Column(name="enabled", type="boolean")
      */
-    private $isActive;
+    private $enabled;
 
     /**
      * @var string
@@ -175,9 +181,9 @@ class UserApp implements UserInterface, \Serializable
      *
      * @return UserApp
      */
-    public function setIsActive($isActive)
+    public function setEnabled($enabled)
     {
-        $this->isActive = $isActive;
+        $this->enabled = $enabled;
     
         return $this;
     }
@@ -187,9 +193,9 @@ class UserApp implements UserInterface, \Serializable
      *
      * @return boolean
      */
-    public function getIsActive()
+    public function getEnabled()
     {
-        return $this->isActive;
+        return $this->enabled;
     }
 
     /**
@@ -262,6 +268,30 @@ class UserApp implements UserInterface, \Serializable
     public function getEmpresa()
     {
         return $this->empresa;
+    }
+    
+    /**
+     * Set empresa
+     *
+     * @param string $empresa
+     *
+     * @return UserApp
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+    
+        return $this;
+    }
+
+    /**
+     * Get empresa
+     *
+     * @return string
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
     }
 
     /**
