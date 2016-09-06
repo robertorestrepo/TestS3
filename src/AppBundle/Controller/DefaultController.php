@@ -50,7 +50,7 @@ class DefaultController extends Controller
                 ->add('roles', ChoiceType::class, array('label' => 'Rol de usuario', 'required' => true,
                 'choices' => array( 'ADMINISTRADOR' => 'ROLE_ADMIN' ,'USUARIO' => 'ROLE_USER'),
                 'multiple' => true))
-                ->add('save', SubmitType::class, array('label' => 'Create Task'))
+                ->add('save', SubmitType::class, array('label' => 'Guardar' , 'attr' => array('class' => 'btn btn-default')))
                 ->getForm();
         
         $form->handleRequest($request);
