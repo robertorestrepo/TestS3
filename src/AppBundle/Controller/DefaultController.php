@@ -10,7 +10,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use AppBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DefaultController extends Controller
 {
@@ -43,6 +46,10 @@ class DefaultController extends Controller
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
+                ->add('enabled', CheckboxType::class, array('label' => 'Usuario habilitado','required' => false))
+                ->add('roles', ChoiceType::class, array('label' => 'Rol de usuario', 'required' => true,
+                'choices' => array( 'ADMINISTRADOR' => 'ROLE_ADMIN' ,'USUARIO' => 'ROLE_USER'),
+                'multiple' => true))
                 ->add('save', SubmitType::class, array('label' => 'Create Task'))
                 ->getForm();
         
@@ -53,7 +60,7 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($usuario);
             $em->flush();
-            return $this->redirectToRoute('task_success');
+            return $this->redirectToRoute('homepage');
             
         }
         
@@ -72,7 +79,9 @@ class DefaultController extends Controller
 	
 	/**
      * @Route("/edit/{id}", name="Editar_Empleado")
-     */
+      
+    * @Security("has_role('ROLE_ADMIN')")
+    */
     public function editAction($id, Request $request){
         // replace this example code with whatever you need
         return $this->render('crud/edit.html.twig');
