@@ -37,13 +37,13 @@ class DefaultController extends Controller
         $usuario = new User();
         
         $form = $this->createFormBuilder($usuario)
-                ->add('email', EmailType::class, array('label' => 'Correo Electronico'))
-                ->add('username', TextType::class, array('label' => 'Usuario'))
+                ->add('email', EmailType::class, array('label' => 'Correo Electronico', 'attr' => array('class' => 'form-control','id' => 'email', 'placeholder' => 'Correo Electronico')))
+                ->add('username', TextType::class, array('label' => 'Usuario', 'attr' => array('class' => 'form-control','id' => 'user', 'placeholder' => 'Usuario')))
                 ->add('plainPassword', RepeatedType::class , array(
                 'type' => PasswordType::class ,
                 'options' => array('translation_domain' => 'FOSUserBundle'),
-                'first_options' => array('label' => 'form.password'),
-                'second_options' => array('label' => 'form.password_confirmation'),
+                'first_options' => array('label' => 'form.password', 'attr' => array('class' => 'form-control','id' => 'pass', 'placeholder' => 'form.password')),
+                'second_options' => array('label' => 'form.password_confirmation', 'attr' => array('class' => 'form-control','id' => 'passRepeat', 'placeholder' => 'form.password_confirmation')),
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
                 ->add('enabled', CheckboxType::class, array('label' => 'Usuario habilitado','required' => false))
