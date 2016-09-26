@@ -84,7 +84,42 @@ class DefaultController extends Controller
     */
     public function editAction($id, Request $request){
         // replace this example code with whatever you need
-        return $this->render('crud/edit.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')->findOneBy(array('username' => $id));
+//        return $this->render('crud/edit.html.twig',array('user' => $user->getEmpresa()));
+        $usuario = new User();
+        
+        $form = $this->createFormBuilder($usuario)
+                ->add('email', EmailType::class, array('label' => 'Correo Electronico', 'attr' => array('class' => 'form-control','id' => 'email', 'placeholder' => 'Correo Electronico' , 'value' => $user->getEmail())))
+                ->add('username', TextType::class, array('label' => 'Usuario', 'attr' => array('class' => 'form-control','id' => 'user', 'placeholder' => 'Usuario')))
+                ->add('plainPassword', RepeatedType::class , array(
+                'type' => PasswordType::class ,
+                'options' => array('translation_domain' => 'FOSUserBundle'),
+                'first_options' => array('label' => 'form.password', 'attr' => array('class' => 'form-control','id' => 'pass', 'placeholder' => 'form.password')),
+                'second_options' => array('label' => 'form.password_confirmation', 'attr' => array('class' => 'form-control','id' => 'passRepeat', 'placeholder' => 'form.password_confirmation')),
+                'invalid_message' => 'fos_user.password.mismatch',
+            ))
+                ->add('enabled', CheckboxType::class, array('label' => 'Usuario habilitado','required' => false))
+                ->add('roles', ChoiceType::class, array('label' => 'Rol de usuario', 'required' => true,
+                'choices' => array( 'ADMINISTRADOR' => 'ROLE_ADMIN' ,'USUARIO' => 'ROLE_USER'),
+                'multiple' => true))
+                ->add('save', SubmitType::class, array('label' => 'Guardar' , 'attr' => array('class' => 'btn btn-default')))
+                ->getForm();
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($usuario);
+            $em->flush();
+            return $this->redirectToRoute('homepage');
+            
+        }
+        
+        return $this->render('crud/edit.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 	
 }
