@@ -28,7 +28,7 @@ class DefaultController extends Controller
     }
 	
 	/**
-     * @Route("/create", name="Registrar Empleado")
+     * @Route("/create", name="Registrar_Empleado")
      */
     public function craeteAction(Request $request){
         // replace this example code with whatever you need
